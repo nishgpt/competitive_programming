@@ -1,0 +1,14 @@
+*.class
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+hs_err_pid*
+*.iws
+*.ipr
+*.iml
+*.swp
+*.out
+*/test-classes/*
+\$*
+
