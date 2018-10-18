@@ -1,13 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define LL long long int 
- 
+
 int main() {
 	int i, j, k, n, t, m;
 	scanf("%d", &t);
 	j = 1;
 	char c;
- 
+
 	while(t--) {
 		stack<pair<int, int> > st;
 		//<<"Case "<<j++<<":"<<endl;
@@ -38,4 +38,4 @@ int main() {
 		}
 	}
 	return 0;
-} 
+}
