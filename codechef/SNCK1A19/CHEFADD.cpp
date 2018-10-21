@@ -26,7 +26,6 @@ int get_ones(int num) {
 }
 
 LL func(int pos, int a_ones, int b_ones, int carry) {
-    // cout<<"called "<<pos<<" "<<a_ones<<" "<<b_ones<<" "<<carry<<endl;
     if(a_ones < 0 || b_ones < 0) return 0;
 
     if(pos == cbits.size() - 1) {
@@ -85,14 +84,6 @@ int main() {
         
         convert_binary(c);
         cout<<func(0, get_ones(a), get_ones(b), 0)<<endl;
-        // for(int i=0;i<cbits.size();i++) {
-        //     for(int x = 0; x<=get_ones(a);x++) {
-        //         for(int y = 0;y<=get_ones(b);y++) {
-        //             cout<<"pos= "<<i<<" "<<x<< " " <<y<<" "<<dp[i][x][y][0]<<endl;
-        //             cout<<"pos= "<<i<<" "<<x<<" "<<y<<" "<<dp[i][x][y][1]<<endl;
-        //         }
-        //     }
-        // }
     }
     return 0;
 }
