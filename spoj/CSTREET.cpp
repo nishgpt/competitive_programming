@@ -1,0 +1,116 @@
+/*
+	NISHANT GUPTA
+	CSE-MNNIT ALLAHABAD
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <queue>
+#include <algorithm>
+#include <vector>
+#include <cstring>
+#include <stack>
+#include <cctype>
+#include <utility>
+#include <map>
+#include <string>
+#include <climits>
+#include <set>
+#include <string>
+#include <sstream>
+#include <utility>
+#include <ctime>
+#include <cassert>
+#include <fstream>
+using namespace std;
+typedef long long LL;
+typedef vector<int> VI;
+typedef pair<int, int> II;
+typedef vector<long long> VLL;
+typedef vector<bool> VB; 
+#define SZ(A) ((int)A.size())
+#define LEN(A) ((int)A.length())
+#define MS(A) memset(A, 0, sizeof(A))
+#define MSV(A,a) memset(A, a, sizeof(A))
+#define MAX(a,b) ((a >= b) ? (a) : (b))
+#define MIN(a,b) ((a >= b) ? (b) : (a))
+#define ABS(a) (((a) > 0) ? (a) : (-a))
+#define MP make_pair
+#define X first
+#define Y second
+#define PB push_back
+#define FOUND(A, x) (A.find(x) != A.end())
+#define getcx getchar_unlocked
+#define INF (int(1e9))
+#define INFL (LL(1e18))
+#define EPS 1e-12 
+#define chkbit(s, b) (s & (1<<b))
+#define setbit(s, b) (s |= (1<<b))
+#define clrbit(s, b) (s &= ~(1<<b))
+#define rep(i, a, n) for(int i = a; i < n; i++)
+#define rev(i, a, n) for(int i = a; i > n; i--)
+#define FORALL(itr, c) for(itr = (c).begin(); itr != (c).end(); itr++)
+#define ALL(A) A.begin(), A.end()
+#define LLA(A) A.rbegin(), A.rend()
+inline void inp( LL &n )
+{ 
+	n=0;    LL ch=getcx();LL sign=1;   
+	while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();} 
+	while(  ch >= '0' && ch <= '9' )    
+	n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+	n=n*sign;
+}   	
+
+struct X
+{
+	LL u,v,cost;
+}edge[300005];
+
+int cmp(struct X a,struct X b)
+{
+	return a.cost==b.cost?(a.u<=b.u?1:0):(a.cost<b.cost?1:0);
+}
+LL find(LL u,LL *parent)
+{
+	if(u==parent[u])return u;
+	LL x=find(parent[u],parent);
+	parent[u]=x;
+	return x;
+}
+
+void _union(LL u,LL v,LL parent[100005])
+{
+	parent[find(u,parent)]=find(v,parent);
+}
+int main()
+{
+	LL t,p,c,a,b,n,m;
+	inp(t);
+	while(t--){
+	inp(p);
+	inp(n);inp(m);
+	rep(i,0,m)
+	{
+		inp(a);inp(b);inp(c);
+		edge[i].u=a;
+		edge[i].v=b;
+		edge[i].cost=c*p;
+	}
+	sort(edge,edge+m,cmp);
+	LL parent[n+1];
+	rep(i,1,n+1)parent[i]=i;
+	LL ans=0;
+	rep(i,0,m)
+	{
+		if(find(edge[i].u,parent)==find(edge[i].v,parent)){}//cycle formed so ignore this edge
+		else
+		{
+			_union(edge[i].u,edge[i].v,parent);//printf("%lld %lld %lld\n",edge[i].u,edge[i].v,edge[i].cost);
+			ans+=edge[i].cost;
+		}
+	}
+	printf("%lld\n",ans);
+	}
+	return 0;
+}

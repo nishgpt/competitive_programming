@@ -2,7 +2,7 @@
 using namespace std;
 #define LL long long int
 #define MOD 1000000007
- 
+
 int main() {
 	LL i, j, k, n, m;
 	cin>>m;
@@ -15,4 +15,4 @@ int main() {
 		printf("%lld\n", k);
 	}
 	return 0;
-} 
+}
