@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define LL long long int
- 
+
 int main() {
 	int t, k=1;
 	scanf("%d", &t);
@@ -15,4 +15,4 @@ int main() {
 		printf("Case %d: %lld\n", k++, n);
 	}
 	return 0;
-} 
+}

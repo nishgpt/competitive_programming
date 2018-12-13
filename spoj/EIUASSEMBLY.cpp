@@ -2,7 +2,7 @@
 using namespace std;
 #define LL long long int
 #define INF 1000000000000000000
- 
+
 bool fun(LL target, LL budget, vector<pair<LL, LL> > v) {
 	int i, j;
 	for(i=0;i<v.size();i++) {
@@ -16,7 +16,7 @@ bool fun(LL target, LL budget, vector<pair<LL, LL> > v) {
 	if(budget < 0)return false;
 	return true;
 }
- 
+
 int main() {
 	int t, i, j;
 	LL n, m, x, y;
