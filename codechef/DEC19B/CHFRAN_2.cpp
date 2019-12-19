@@ -26,34 +26,34 @@ void handle_separately(vector<pair<int, int> > ranges, vector<int> st, vector<in
     int as[MAX+2] = {0}, ae[MAX+2] = {0};
     int i;
 
-    // for(i=0;i<n;i++) {
-    //     uniq[ranges[i].first] = 1;
-    //     uniq[ranges[i].second] = 1;
-    //     as[st[i]]++;
-    //     ae[e[i]]++;
-    // }
+    for(i=0;i<n;i++) {
+        uniq[ranges[i].first] = 1;
+        uniq[ranges[i].second] = 1;
+        as[st[i]]++;
+        ae[e[i]]++;
+    }
 
-    // vector<int> rev_indices;
-    // for(i=1;i<=MAX;i++) {
-    //     if(uniq[i] == 1) rev_indices.pb(i);
-    //     as[i]+=as[i-1];
-    //     ae[i]+=ae[i-1];
-    // }
+    vector<int> rev_indices;
+    for(i=1;i<=MAX;i++) {
+        if(uniq[i] == 1) rev_indices.pb(i);
+        as[i]+=as[i-1];
+        ae[i]+=ae[i-1];
+    }
 
-    // int mini = INT_MAX;
-    // int idx = rev_indices.size();
-    // for(i=1;i<idx;i++) {
-    //     if(i==MAX_ITER) raise(SIGABRT);
-    //     int num_of_ranges_ending_before = ae[rev_indices[i-1]];
-    //     int num_of_ranges_starting_after = n - as[rev_indices[i]-1];
+    int mini = INT_MAX;
+    int idx = rev_indices.size();
+    for(i=1;i<idx;i++) {
+        if(i==MAX_ITER) raise(SIGABRT);
+        int num_of_ranges_ending_before = ae[rev_indices[i-1]];
+        int num_of_ranges_starting_after = n - as[rev_indices[i]-1];
 
-    //     if(num_of_ranges_ending_before > 0 && num_of_ranges_starting_after > 0) {
-    //         mini = min(mini, n - (num_of_ranges_ending_before + num_of_ranges_starting_after));
-    //     }
-    // }
+        if(num_of_ranges_ending_before > 0 && num_of_ranges_starting_after > 0) {
+            mini = min(mini, n - (num_of_ranges_ending_before + num_of_ranges_starting_after));
+        }
+    }
 
-    // if(mini == INT_MAX) mini = -1;
-    // cout<<mini<<endl;
+    if(mini == INT_MAX) mini = -1;
+    cout<<mini<<endl;
 }
 
 int main() {
@@ -114,4 +114,3 @@ int main() {
     }
     return 0;
 }
-
