@@ -1,52 +1,37 @@
 /*
-    Author : Nishant Gupta 2.0
+// Sample code to perform I/O:
+
+cin >> name;                            // Reading input from STDIN
+cout << "Hi, " << name << ".\n";        // Writing output to STDOUT
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
 */
+
+// Write your code here
 #include<bits/stdc++.h>
-
-#define LL long long int
-#define pb push_back
-#define mp make_pair
-#define MAX 100005
-#define MOD 1000000007
-
 using namespace std;
-
 int main() {
-	int t;
-	string  p, h;
-	
-	cin>>t;
-	
-	while(t--) {
-		cin>>p;
-		cin>>h;
-		
-		int i, j;
-		
-		bool flag  = true;
-		for(i=0;i<h.length();i++) {
-			flag = true;
-			int temp[26] = {0};
-			for(j=0;j<p.length();j++) {
-				temp[p[j]-'a']++;
-			}
-			
-			for(j=i;j<i+p.length();j++) {
-				temp[h[j]-'a']--;
-			}
-			
-			for(j=0;j<26;j++) {
-				if(temp[j] != 0) {
-					flag = false; break;
-				}
-			}
-			
-			if(flag) break;
-		}
-		
-		if(flag) cout<<"YES"<<endl;
-		else cout<<"NO"<<endl;
-	}
-    return 0;
+    int t;
+    cin>>t;
+    int n, m;
+    while(t--) {
+        cin>>n>>m;
+        char c;
+        int a[n][m];
+        int i, j;
+        for(j=0;j<n;j++) {
+            for(i=0;i<2*m;i++) {
+                cin>>c;
+                if(c == '/') a[j][i/2] = 1;
+                else if(c == '\') a[j][i/2] = 2;
+            }
+        }
+        
+        for(i=0;i<n;i++) {
+            for(j=0;j<m;j++) {
+                cout<<a[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+    }
 }
-
