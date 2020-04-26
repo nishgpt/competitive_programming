@@ -23,7 +23,7 @@ void factorial() {
 /* Modulo exponentiation */
 LL power(LL base, LL exp, LL ans) {
 	if(!exp) return ans % MOD;
-	if(exp&1) ans = (ans * b) % MOD;
+	if(exp&1) ans = (ans * base) % MOD;
 	return power((base * base) % MOD, exp>>1, ans);
 }
 
