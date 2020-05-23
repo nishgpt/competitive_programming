@@ -48,6 +48,33 @@ void dfs(int node, vector<int> adj[MAX]) {
 	return ;
 }
 
+/* Dijkstra Algo */
+int dijkstra(int s, int d, vector<pi> adj[MAX]) {
+	int mincost[MAX], i;
+	rep(i, 0, MAX) mincost[i] = INF;
+	
+	priority_queue<pi, vector<pi>, greater<pi> > pq;
+	pq.push(MP(0, s));
+	mincost[s] = 0;
+	
+	while(!pq.empty()) {
+		pi _top = pq.top();
+		pq.pop();
+		int node = _top.Y;
+		
+		for(i=0;i<adj[node].size();i++) {
+			int ch = adj[node][i].X;
+			int wt = adj[node][i].Y;
+			if(mincost[node] + wt < mincost[ch]) {
+				mincost[ch] = mincost[node] + wt;
+				pq.push(MP(mincost[ch], ch));
+			} 
+		}
+	}
+	
+	return mincost[d];
+}
+
 int main() {
 
     return 0;
