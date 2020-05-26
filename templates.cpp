@@ -75,6 +75,40 @@ int dijkstra(int s, int d, vector<pi> adj[MAX]) {
 	return mincost[d];
 }
 
+/* Preprocess method for KMP */
+void preprocess(string p, int* pie, int m) { 
+    int len = 0, i = 1;   
+    pie[0] = 0; 
+    while (i < m) { 
+        if (p[i] == p[len]) {
+			pie[i] = ++len; i++; 
+        } 
+        else {  
+            if (len) len = pie[len - 1];   
+            else { 
+				pie[i] = 0; i++; 
+            } 
+        } 
+    } 
+}
+
+/* KMP evaluation */
+int KMP(string s,string p,int *pie,int n,int m) {
+    int i,q=0;//q is no. of characters matched
+    int occurences = 0;
+    rep(i,0,n) {
+        while(q>0&&p[q]!=s[i])
+            q=pie[q];
+        if(p[q]==s[i])q++;
+        if(q==m) {
+            occurences++;
+            q=pie[q];
+        }
+    }
+
+    return occurences;
+}
+
 int main() {
 
     return 0;

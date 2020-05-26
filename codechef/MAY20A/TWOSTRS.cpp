@@ -96,6 +96,10 @@ int main() {
     string a, b;
 
     inp(t);
+    string ss = "aabb";
+    int pp[4];
+    preprocess(ss, pp, 4);
+    for(i=0;i<4;i++) cout<<pp[i]<<" ";
 
     while(t--) {
         cin>>a;
