@@ -7,6 +7,7 @@
 #define pb push_back
 #define mp make_pair
 #define MAX 100005
+#define LOG_MAX 20
 #define MOD 1000000007
 
 using namespace std;
