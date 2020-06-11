@@ -2,15 +2,29 @@
     Author : Nishant Gupta 2.0
 */
 #include<bits/stdc++.h>
+using namespace std;
 
 #define LL long long int
-#define pb push_back
-#define mp make_pair
+#define getcx getchar_unlocked
+#define X first
+#define Y second
+#define PB push_back
+#define MP make_pair
 #define MAX 100005
 #define LOG_MAX 20
 #define MOD 1000000007
-
-using namespace std;
+#define INF 0x3f3f3f3f
+#define INFL (LL(1e18))
+#define chk(a) cerr << endl << #a << " : " << a << endl
+#define chk2(a,b) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << endl
+#define chk3(a,b,c) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << "\t" << #c << " : " << c << endl
+#define chk4(a,b,c,d) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << "\t" << #c << " : " << c << "\t" << #d << " : " << d << endl
+#define rep(i, a, n) for(i=a;i<n;i++)
+#define rev(i, a, n) for(i=a;i>=n;i--)
+#define MSV(A,a) memset(A, a, sizeof(A))
+#define rep_itr(itr, c) for(itr = (c).begin(); itr != (c).end(); itr++)
+typedef pair<int, int> pi;
+typedef pair<LL, LL> pl;
 
 /* Factorial modulo MOD */
 LL fact[MAX];
@@ -37,13 +51,10 @@ LL nCr(LL n, LL r) {
 }
 
 /* DFS on tree */
-bool visited[MAX];
-void dfs(int node, vector<int> adj[MAX]) {
-	visited[node] = true;
-	
+void dfs(int node, vector<int> adj[MAX], int parent) {
 	for(int i=0;i<adj[node].size();i++) {
-		if(!visited[adj[node][i]]) {
-			dfs(adj[node][i], adj);
+		if(parent != adj[node][i]) {
+			dfs(adj[node][i], adj, node);
 		}
 	}
 	return ;
@@ -108,6 +119,18 @@ int KMP(string s,string p,int *pie,int n,int m) {
     }
 
     return occurences;
+}
+
+/* Sieve of Eratosthenes */
+bitset<MAX> prime;
+void compute_prime() {
+	prime.flip(); //makes all true
+	prime[0] = prime[1] = false;
+	
+	for(int i=2;i*i<MAX;i++) {
+		if(prime[i])
+			for(int j=i*i;j<MAX;j+=i) prime[j] = false;
+	}
 }
 
 int main() {
