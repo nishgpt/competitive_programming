@@ -133,6 +133,23 @@ void compute_prime() {
 	}
 }
 
+/* Covert to binary in LOG_MAX bits */
+void convert_to_binary(LL num, vector<int> &v) {
+	queue<int> q;
+	while(num) {
+		q.push(num&1);
+		num>>=1;
+	}
+	
+	for(int i=LOG_MAX-1;i>=0;i--) {
+		if(q.empty()) break;
+		else {
+			v[i] = q.front();
+			q.pop();
+		}
+	}
+}
+
 int main() {
 
     return 0;
