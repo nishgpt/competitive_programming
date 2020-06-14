@@ -150,6 +150,50 @@ void convert_to_binary(LL num, vector<int> &v) {
 	}
 }
 
+/* LCA with binary lifting */
+int level[MAX];
+int parent[MAX];
+int p[MAX][LOG_MAX];
+void precompute_lca(int n) {
+	int i, j; 
+
+	for (i = 1; i <= n; i++)
+		for (j = 0; (1 << j) <= n; j++)
+			p[i][j] = -1;
+
+	for (i = 1; i <= n; i++)
+		p[i][0] = parent[i]; 
+		
+	for (j = 1; (1 << j) <= n; j++) {
+		for (i = 1; i <= n; i++)
+			if (p[i][j - 1] != -1)
+				p[i][j] = p[p[i][j - 1]][j - 1];
+	}
+}
+
+int get_lca(int u, int v) {
+	int tmp, _log, i; 
+	if (level[u] < level[v]) {
+		tmp = u, u = v, v = tmp;
+	} 
+
+	for (_log=1;1<<_log<=level[u];_log++);
+	_log--;
+
+	for (i=_log;i>=0;i--) {
+		if (level[u] - (1 << i) >= level[v]) u = p[u][i];
+	}
+
+	if (u == v) return u; 
+
+	for (i = _log; i >= 0; i--)
+		if (p[u][i] != -1 && p[u][i] != p[v][i])
+			u = p[u][i], v = p[v][i]; 
+
+	return parent[u];
+}
+
+
 int main() {
 
     return 0;
