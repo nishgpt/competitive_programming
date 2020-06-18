@@ -10,9 +10,9 @@ using namespace std;
 #define Y second
 #define PB push_back
 #define MP make_pair
-#define MAX 200005
+#define MAX 100005
 #define LOG_MAX 20
-#define MOD 1000000007
+#define MOD 998244353
 #define INF 0x3f3f3f3f
 #define INFL (LL(1e18))
 #define chk(a) cerr << endl << #a << " : " << a << endl
@@ -27,33 +27,69 @@ using namespace std;
 #define inl2(x, y) scanf("%lld %lld", &x, &y)
 #define MSV(A,a) memset(A, a, sizeof(A))
 #define rep_itr(itr, c) for(itr = (c).begin(); itr != (c).end(); itr++)
+#define finish(x) {cout<<x<<'\n'; return;}
 typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
 const char en = '\n';
 
-int a[MAX], b[MAX];
 void solve() {
 	int n, m;
 	in2(n, m);
-	
-	int lmin[n], rmin[n];
-	for(int i=0;i<n;i++) {
-		in(a[i]);
-		lmin[i] = a[i];
-		if(i > 0) lmin[i] = min(lmin[i], lmin[i-1]);
-	}
+	int mini = INT_MAX;
+	vector<int> a(n), b(m);
+	for(int i=0;i<n;i++) {in(a[n-i-1]);mini = min(a[n-i-1], mini);}
 	for(int i=0;i<m;i++) in(b[i]);
 	
-	for(int i=n-1;i>=0;i--) {
-		rmin[i] = a[i];
-		if(i < n-1) rmin[i] = min(rmin[i], rmin[i-1]);
-	}
+	sort(b.rbegin(), b.rend());
 	
-	
+	if(mini < b[m-1]) finish(0);
+	//for b[0]
+	int idx = -1;
+	bool ok = true;
+	bool f = false;
 	for(int i=0;i<n;i++) {
-		
+		if(a[i] < b[0]) {
+			ok = false;
+			break;
+		}
+		if(b[0] == a[i]) {
+			idx = i;
+			f = true;
+			break;
+		}
 	}
-
+	
+	if(!ok || !f) finish(0);
+	
+	int curr = 1;
+	LL ans = 1;
+	while(curr < m) {
+		int prev = idx;
+		f = false;
+		for(int i=prev+1;i<n;i++) {
+			if(a[i] < b[curr]) {
+				ok = false;
+				break;
+			}
+			if(b[curr] == a[i]) {
+				f = true;
+				idx = i;
+				break;
+			}
+		}
+		
+		if(!ok || !f) finish(0);
+		
+		int bp = -1;
+		for(int i=prev+1;i<=idx;i++) {
+			if(b[curr-1] > a[i]) {bp = i;break;}
+		}
+		
+		ans = (ans * (bp-prev)) % MOD;
+		curr++;
+	}
+	
+	cout<<ans<<en;
 }
 
 int main() {
