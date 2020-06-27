@@ -193,6 +193,16 @@ int get_lca(int u, int v) {
 	return parent[u];
 }
 
+/* Union Find / DSU */
+//have a parent array global
+int find(int u) {
+	if(u == parent[u])return u;
+	return parent[u] = find(parent[u]);
+}
+
+void _union(int u, int v) {
+	parent[find(u)] = find(v);
+}
 
 int main() {
 
