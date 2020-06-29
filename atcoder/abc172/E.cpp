@@ -56,20 +56,6 @@ LL nCr(LL n, LL r) {
 	return (numerator * power(denominator, MOD-2, 1)) % MOD;
 }
 
-LL derrangement(LL n) {
-	LL f = fact[n];
-	LL derr = 0;
-	for(int i=0;i<=n;i++) {
-		LL x = power(fact[i], MOD-2, 1);
-		LL sign = (i % 2 == 0) ? 1 : -1;
-		derr = (derr + sign * x);
-		if(sign == -1) derr = derr + MOD;
-		derr = derr % MOD;
-	}
-	//~chk(derr);
-	return (derr * f) % MOD;
-}
-
 void pre() {
 	factorial();
 }
@@ -80,13 +66,16 @@ void solve() {
 	
 	LL npr = (nCr(m, n) * fact[n]) % MOD;
 	
-	LL y = 0;
-	for(int i=0;i<=m-n;i++) {
-		LL x1 = (nCr(m-n, i) * nCr(n, i)) % MOD;
-		y = (y + x1) % MOD;
+	LL derr = 0;
+	for(int i=0;i<=n;i++) {
+		LL temp = (nCr(n, i) * nCr(m-i, n-i)) % MOD;
+		temp = (temp * fact[n-i]) % MOD;
+		
+		if(i & 1) derr = (derr - temp + MOD) % MOD;
+		else derr = (derr + temp) % MOD;
 	}
-	y = (y * derrangement(n)) % MOD;
-	LL ans = (npr * y) % MOD;
+	
+	LL ans = (npr * derr) % MOD;
 	cout<<ans<<en;
 }
 
