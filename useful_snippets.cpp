@@ -204,6 +204,33 @@ void _union(int u, int v) {
 	parent[find(u)] = find(v);
 }
 
+
+/* Trie */
+/**
+ * Usage 
+ * counter = 1
+ * for word in words:
+ *   counter = insert(word, counter)
+ **/
+struct Trie {
+	int next[26];
+	bool leaf;
+} nodes[MAX];
+
+int insert(string s, int counter) {
+	int curr=0, a = counter;
+	for(int i=0;i<s.length();i++) {
+		if(!nodes[curr].next[s[i]-'a']) {
+			nodes[curr].next[s[i]-'a'] = a;
+			curr = a++;
+		}
+		else curr = nodes[curr].next[s[i]-'a'];
+		if(i+1 == s.length()) nodes[curr].leaf = true;
+	}
+	return a;
+}
+
+
 int main() {
 
     return 0;
