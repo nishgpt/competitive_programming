@@ -230,6 +230,20 @@ int insert(string s, int counter) {
 	return a;
 }
 
+/* Modulo multiplication */
+LL mulmod(LL a, LL b) {
+	a = (a + MOD) % MOD;
+	b = (b + MOD) % MOD;
+	LL res = 0;
+	a %= MOD;
+	while(b) {
+		if(b&1) res = (res+a)%MOD;
+		a = (a*2)%MOD;
+		b >>= 1;
+	}
+	return res; 
+}
+
 
 int main() {
 
