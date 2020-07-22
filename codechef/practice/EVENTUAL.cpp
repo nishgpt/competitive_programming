@@ -10,7 +10,7 @@ using namespace std;
 #define Y second
 #define PB push_back
 #define MP make_pair
-#define MAX 300005
+#define MAX 100005
 #define LOG_MAX 20
 #define MOD 1000000007
 #define INF 0x3f3f3f3f
@@ -32,28 +32,38 @@ typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
 const char en = '\n';
 
-LL sum[MAX];
-void pre() {
-	for(int i=1;i<MAX;i++) sum[i] = sum[i-1] + i;
+
+inline void inp( int &n ) { 
+	n=0;    int ch=getcx();int sign=1;   
+	while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();} 
+	while(  ch >= '0' && ch <= '9' )    
+	n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+	n=n*sign;
+}
+
+inline void inp1( LL &n ) { 
+	n=0;    LL ch=getcx();LL sign=1;   
+	while( ch < '0' || ch > '9' ){if(ch=='-')sign=-1; ch=getcx();} 
+	while(  ch >= '0' && ch <= '9' )    
+	n = (n<<3)+(n<<1) + ch-'0', ch=getcx();
+	n=n*sign;
 }
 
 void solve() {
-	int n, k;
-	in2(n, k);
-	
-	int idx = upper_bound(sum, sum+MAX, k) - sum;
-	idx--;
-	if(sum[idx] == k) idx--;
-	k -= sum[idx];
-	string ans = string(n, 'a');
-	ans[n-idx-2] = 'b';
-	ans[n-k] = 'b';
-	cout<<ans<<en;
+	int n;inp(n);
+	string s;
+	cin>>s;
+	vector<int> a(26, 0);
+	for(int i=0;i<n;i++) a[s[i]-'a']++;
+	bool ok = true;
+	for(int i=0;i<26;i++) if(a[i]&1) ok = false;
+	if(ok) finish("YES");
+	finish("NO");
 }
 
 int main() {
 	int t = 1;
-	pre();
+	
 	cin>>t;
 	while(t--) {
 		solve();
