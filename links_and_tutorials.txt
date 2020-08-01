@@ -1,0 +1,4 @@
+Useful Links / Tutorials
+
+** Sum over Subsets Dynamic Programming (SOS DP) - https://codeforces.com/blog/entry/45223
+** 
