@@ -1,4 +1,4 @@
 Useful Links / Tutorials
 
 ** Sum over Subsets Dynamic Programming (SOS DP) - https://codeforces.com/blog/entry/45223
-** 
+** Number of distinct elements in a subarray/range - https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/
