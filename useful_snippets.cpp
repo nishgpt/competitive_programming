@@ -244,6 +244,18 @@ LL mulmod(LL a, LL b) {
 	return res; 
 }
 
+/* Topological sort */
+/**
+ * Print elements of stack at the end
+ **/
+stack<int> st;
+void topoSort(int node, vector<int> *adj, vector<bool> &vis) {
+	vis[node] = true;
+	for(int i=0;i<adj[node].size();i++) {
+		if(!vis[adj[node][i]]) topoSort(adj[node][i], adj, vis);
+	}
+	st.push(node);
+}
 
 int main() {
 
