@@ -30,72 +30,12 @@ using namespace std;
 #define finish(x) {cout<<x<<'\n'; return;}
 typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
-typedef pair<int, LL> pil;
 const char en = '\n';
 
-struct compare { 
-    bool operator()(pil& p1, pil& p2) {
-		LL loss1 = p1.X * (p1.Y - p1.Y/2);
-		LL loss2 = p2.X * (p2.Y - p2.Y/2);
-		return loss1 < loss2;
-    }
-};
-
-vector<pil> adj[MAX];
-map<pi, pil> leaf_paths;
-
-int dfs(int node, int par) {
-	int cnt = 0;
-	for(int i=0;i<adj[node].size();i++) {
-		if(par != adj[node][i].X) {
-			int temp = dfs(adj[node][i].X, node);
-			leaf_paths[MP(min(node, adj[node][i].X), max(node, adj[node][i].X))] = MP(temp, adj[node][i].Y);
-			cnt += temp;
-		}
-	}
-	if(cnt == 0) cnt = 1;
-	return cnt;
-}
-
 void solve() {
-	int n;in(n);
-	LL s; inl(s);
-	int u, v; LL w;
-	
-	for(int i=0;i<n-1;i++) {
-		in2(u, v);
-		inl(w);
-		adj[u].PB(MP(v, w));
-		adj[v].PB(MP(u, w));
-	}
-	
-	dfs(1, -1);
-	
-	map<pi, pil> :: iterator it;
-	priority_queue<pil, vector<pil>, compare> pq;
-	LL sum = 0;
-	for(it=leaf_paths.begin();it!=leaf_paths.end();it++) {
-		LL contri = it->Y.Y * it->Y.X;
-		sum += contri;
-		pq.push(MP(it->Y.X, it->Y.Y));
-	}
-	
-	int ans = 0;
-	while(sum > s) {
-		pil edge = pq.top();
-		pq.pop();
-		
-		sum -= (edge.X * edge.Y);
-		edge.Y>>=1;
-		sum += (edge.X * edge.Y);
-		pq.push(edge);
-		ans++;
-	}
-	cout<<ans<<en;
-	
-	//clear
-	for(int i=1;i<=n;i++) adj[i].clear();
-	leaf_paths.clear();
+	int a, b;
+	in2(a, b);
+	cout<<((a+b)>>1)<<" "<<((a-b)>>1)<<en;
 }
 
 int main() {
