@@ -32,8 +32,8 @@ typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
 const char en = '\n';
 
-bool cmp(pl &a, pl &b) {
-	return (2L * a.X + a.Y) >= (2L * b.X + b.Y);
+bool cmp(const pl &a, const pl &b) {
+	return (2ll * a.X + a.Y) > (2ll * b.X + b.Y);
 }
 
 void solve() {
