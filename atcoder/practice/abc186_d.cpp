@@ -14,7 +14,6 @@ using namespace std;
 #define LOG_MAX 20
 #define MOD 1000000007
 #define INF 0x3f3f3f3f
-#define INFL (LL(1e18))
 #define chk(a) cerr << endl << #a << " : " << a << endl
 #define chk2(a,b) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << endl
 #define chk3(a,b,c) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << "\t" << #c << " : " << c << endl
