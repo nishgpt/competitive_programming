@@ -19,7 +19,6 @@ using namespace std;
 #define chk3(a,b,c) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << "\t" << #c << " : " << c << endl
 #define chk4(a,b,c,d) cerr << endl << #a << " : " << a << "\t" << #b << " : " << b << "\t" << #c << " : " << c << "\t" << #d << " : " << d << endl
 #define rep(i, a, n) for(i=a;i<n;i++)
-#define rev(i, a, n) for(i=a;i>=n;i--)
 #define in(x) scanf("%d", &x)
 #define inl(x) scanf("%lld", &x)
 #define in2(x, y) scanf("%d %d", &x, &y)
