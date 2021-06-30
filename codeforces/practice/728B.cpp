@@ -33,24 +33,26 @@ typedef pair<LL, LL> pl;
 const char en = '\n';
 
 void solve() {
-	int n;
-	in(n);
-	vector<int> v(n);
-	for (int i = 1; i <= n; i++) {
-		v[i - 1] = i;
-	}
+	int n; in(n);
 
-	for (int i = 1; i < n; i += 2) {
-		swap(v[i], v[i - 1]);
-	}
-	if (n & 1) {
-		swap(v[n - 1], v[n - 2]);
-	}
-
+	int a[2 * n + 1];
+	MSV(a, -1);
 	for (int i = 0; i < n; i++) {
-		cout << v[i] << " ";
+		int x; in(x);
+		a[x] = i + 1;
 	}
-	cout << en;
+
+	LL ans = 0;
+	for (LL i = 1; i <= 2 * n; i++) {
+		if (a[i] == -1) continue;
+
+		for (LL j = i + 1;; j++) {
+			if (i * j > 2 * n) break;
+			if (a[j] != -1 && a[i] + a[j] == i * j) ans++;
+		}
+	}
+
+	cout << ans << en;
 }
 
 int main() {
