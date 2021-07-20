@@ -69,14 +69,14 @@ void generate(int n, int max_degree) {
 }
 
 void generate_tree() {
-	cout << "Enter number of nodes:";
+	cerr << "Enter number of nodes:";
 	int n; in(n);
 	if (n >= MAX) {
 		cerr << "Maximum nodes allowed " << MAX - 1 << en;
 		return;
 	}
 
-	cout << "Enter type of tree:" << en << "1 for Linear Tree" << en << "2 for Binary Tree" << en << "3 for N-ary Tree" << en;
+	cerr << "Enter type of tree:" << en << "1 for Linear Tree" << en << "2 for Binary Tree" << en << "3 for N-ary Tree" << en;
 	int type; in(type);
 
 	switch (type) {
@@ -97,10 +97,10 @@ void generate_tree() {
 
 int main() {
 	srand(time(0));
-	cout << "==============================Tree Generator==============================" << en;
-	cout << "Output Format" << en << "First line contains a single integer N denoting number of nodes" << en;
-	cout << "Next N-1 lines contain two integers U V denoting an edge b/w them" << en;
-	cout << "==========================================================================" << en << en;
+	cerr << "==============================Tree Generator==============================" << en;
+	cerr << "Output Format" << en << "First line contains a single integer N denoting number of nodes" << en;
+	cerr << "Next N-1 lines contain two integers U V denoting an edge b/w them" << en;
+	cerr << "==========================================================================" << en << en;
 	generate_tree();
 	return 0;
 }
