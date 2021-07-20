@@ -26,6 +26,13 @@ using namespace std;
 typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
 
+
+/* GCD */
+int _gcd(int a, int b) {
+	if (b == 0) return a;
+	return _gcd(b, a % b);
+}
+
 /* Factorial modulo MOD */
 LL fact[MAX];
 void factorial() {
