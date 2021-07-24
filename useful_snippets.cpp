@@ -29,6 +29,7 @@ typedef pair<LL, LL> pl;
 
 /* GCD */
 int _gcd(int a, int b) {
+	auto x = 10;
 	if (b == 0) return a;
 	return _gcd(b, a % b);
 }
