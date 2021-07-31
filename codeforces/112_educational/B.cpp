@@ -32,14 +32,6 @@ typedef pair<int, int> pi;
 typedef pair<LL, LL> pl;
 const char en = '\n';
 
-pi shift(pi l1, pi r1, pi l2, pi r2) {
-	int xd = min(r1.X, r2.X) - max(l1.X, l2.X);
-	int yd = min(r1.Y, r2.Y) - max(l1.Y, l2.Y);
-	if (xd < 0 || yd < 0) return MP(0, 0);
-
-	return MP(xd, yd);
-}
-
 void solve() {
 	int n, m; in2(n, m);
 	int x1, y1, x2, y2;
@@ -49,29 +41,25 @@ void solve() {
 	in2(w, h);
 	if (w + (x2 - x1) > n && h + (y2 - y1) > m) finish(-1);
 
-	double mini = 1.0 * INT_MAX;
+	int mini = INT_MAX;
 
-	//bottom left
-	pi bl = shift(MP(0, 0), MP(w, h), MP(x1, y1), MP(x2, y2));
-	if (x2 + bl.X <= n) mini = min(mini, 1.0 * bl.X);
-	if (y2 + bl.Y <= m) mini = min(mini, 1.0 * bl.Y);
+	//adjust horizontally
+	if ((x2 - x1) + w <= n) {
+		//left
+		mini = min(mini, max(0, w - x1));
+		//right
+		mini = min(mini, max(0, x2 - n + w));
+	}
 
-	//bottom right
-	pi br = shift(MP(n - w, 0), MP(n, h), MP(x1, y1), MP(x2, y2));
-	if (x1 - br.X >= 0) mini = min(mini, 1.0 * br.X);
-	if (y2 + br.Y <= m) mini = min(mini, 1.0 * br.Y);
+	//adjust vertically
+	if ((y2 - y1) + h <= m) {
+		//top
+		mini = min(mini, max(0, y2 - m + h));
+		//down
+		mini = min(mini, max(0, h - y1));
+	}
 
-	//top left
-	pi tl = shift(MP(0, m - h), MP(w, m), MP(x1, y1), MP(x2, y2));
-	if (x2 + tl.X <= n) mini = min(mini, 1.0 * tl.X);
-	if (y1 - tl.Y >= 0) mini = min(mini, 1.0 * tl.Y);
-
-	//top right
-	pi tr = shift(MP(n - w, m - h), MP(n, m), MP(x1, y1), MP(x2, y2));
-	if (x1 - tr.X >= 0) mini = min(mini, 1.0 * tr.X);
-	if (y1 - tr.Y >= 0) mini = min(mini, 1.0 * tr.Y);
-
-	printf("%0.8lf\n", mini);
+	cout << mini << en;
 }
 
 int main() {
