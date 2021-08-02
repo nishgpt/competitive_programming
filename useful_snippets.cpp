@@ -265,6 +265,57 @@ void topoSort(int node, vector<int> *adj, vector<bool> &vis) {
 	st.push(node);
 }
 
+/* Segment Tree */
+/**
+ * Point update + Range Maximum Query
+ */
+int seg[4 * MAX];
+void construct(int node, int st, int end) {
+	if (st == end) {
+		seg[node] = 0;
+		return;
+	}
+
+	int mid = (st + end) >> 1;
+	construct(node << 1, st, mid);
+	construct(1 + (node << 1), mid + 1, end);
+	int l = node << 1;
+	int r = l + 1;
+	seg[node] = max(seg[l], seg[r]);
+}
+
+void update(int node, int st, int end, int idx, int val) {
+	if (st == end && st == idx) {
+		seg[node] = max(val, seg[node]);
+		return ;
+	}
+
+	int mid = (st + end) >> 1;
+	if (idx <= mid) update(node << 1, st, mid, idx, val);
+	else if (idx > mid) update(1 + (node << 1), mid + 1, end, idx, val);
+
+	int l = node << 1, r = l + 1;
+
+	seg[node] = max(seg[node], max(seg[l], seg[r]));
+}
+
+int query(int node, int st, int end, int qs, int qe) {
+	if (st > end || qs > end || qe < st) {
+		return 0;
+	}
+
+	if (st >= qs && qe >= end) {
+		return seg[node];
+	}
+
+	int mid = (st + end) >> 1;
+	int l = query(node << 1, st, mid, qs, qe);
+	int r = query(1 + (node << 1), mid + 1, end, qs, qe);
+
+	return max(l, r);
+}
+/***********************************************************/
+
 int main() {
 
 	return 0;
