@@ -158,6 +158,33 @@ void convert_to_binary(LL num, vector<int> &v) {
 	}
 }
 
+int dp[75][4905];
+int call(int row, int sum, int target, vector<vector<int>>& mat, int n, int m) {
+	if (dp[row][sum] != -1) return dp[row][sum];
+
+	int ans = INT_MAX;
+	if (row == n - 1) { //last row
+		for (int i = 0; i < m; i++) {
+			ans = min(ans, abs(sum + mat[row][i] - target));
+		}
+		return dp[row][sum] = ans;
+	}
+
+	//for other rows
+	for (int i = 0; i < m; i++) {
+		ans = min(ans, call(row + 1, sum + mat[row][i], target, mat, n, m));
+	}
+	return dp[row][sum] = ans;
+}
+
+int minimizeTheDifference(vector<vector<int>>& mat, int target) {
+	memset(dp, -1, sizeof dp);
+	int n = mat.size();
+	int m = mat[0].size();
+	return call(0, 0, target, mat, mat.size(), mat[0].size());
+
+}
+
 /* LCA with binary lifting */
 int level[MAX];
 int parent[MAX];
