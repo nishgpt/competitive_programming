@@ -45,17 +45,16 @@ LL call(int pos, int mask, int last, int n, string &s) {
 	//ignore this char
 	LL ans = call(pos + 1, mask, last, n, s);
 
-	//add this char as the only new
 	int curr = s[pos] - 'A';
-	//ans = (ans + call(pos + 1, (1 << curr), curr, n, s)) % MOD;
-
-	//add this char as append
 	bool seen = (((1 << curr) & mask) != 0);
 
-	if (!seen) { //when this is not seen before
+	//add this char as append
+	//1. when this is not seen before
+	if (!seen) {
 		ans = (ans + call(pos + 1, (mask | (1 << curr)), curr, n, s)) % MOD;
 	}
 
+	//2. when this is the last char
 	if (seen && (last == curr)) {
 		ans = (ans + call(pos + 1, mask, curr, n, s)) % MOD;
 	}
@@ -66,43 +65,10 @@ LL call(int pos, int mask, int last, int n, string &s) {
 void solve() {
 	int n; in(n);
 	string s; cin >> s;
-
 	s = "." + s;
 
 	MSV(dp, -1);
-	// int i, c1, c2;
-	// rep(i, 1, n + 1) {
-	// 	//copy previous data
-	// 	int idx = s[i] - 'A';
-	// 	rep(c1, 0, 10) {
-	// 		rep(c2, 0, 10) {
-	// 			if (c1 == c2) continue;
-
-	// 			dp[i][c1][c2][0] = (dp[i][c1][c2][0] + dp[i - 1][c1][c2][0]) % MOD;
-	// 			dp[i][c1][c2][1] = (dp[i][c1][c2][1] + dp[i - 1][c1][c2][1]) % MOD;
-	// 		}
-	// 	}
-
-	// 	rep(c2, 0, 10) {
-	// 		if (c2 != idx) {
-	// 			dp[i][idx][c2][0] = (dp[i][idx][c2][0] + 1) % MOD;
-	// 			rep(c1, 0, 10) {
-	// 				if (c1 != idx) {
-	// 					dp[i][idx][c2][1] = (dp[i][idx][c2][1] + dp[i - 1][c2][c1][1] + dp[i - 1][c2][c1][0]) % MOD;
-	// 				}
-	// 				else
-	// 				}
-
-	// 		}
-	// 		else {
-	// 			dp[i][idx][c2][1] = (dp[i][idx][c2][1] + 1) % MOD;
-	// 		}
-	// 	}
-	// }
-
-	LL ans = call(1, 0, 10, n, s);
-
-	finish(ans);
+	finish(call(1, 0, 10, n, s));
 }
 
 int main() {
